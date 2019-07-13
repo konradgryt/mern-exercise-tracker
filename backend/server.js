@@ -18,6 +18,15 @@ connection.once('open', () => {
     console.log("Connection to MongoDB database established successfully")
 })
 
+//requiring the files 
+//const exercisesRouter = require('./routes/exercises');
+const usersRouter = require('./routes/users');
+
+//and then using the files - when somebody goes to /exercise in URL then its going to load everything in the route
+//app.use('/exercises', exercisesRouter);
+app.use('/users', usersRouter);
+
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 }); // starts the server, listening on wanted port
