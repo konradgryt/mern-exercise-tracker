@@ -27,4 +27,33 @@ router.route('/add').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err)); // or error message
 });
 
+// :id is a variable - object id created automatically by mongo
+router.route('/:id').get((req,res) => {
+  Exercise.findById(req.params.id) //gets id from the url
+    .then(exercise => res.json(exercise)) //return as json
+    .catch(err => res.status(400).json('Error: ' + err)); // or error
+});
+
+router.route('/:id').delete((req,res) => { //delete request
+  Exercise.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Exercise deleted'))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/update/:id').post((req,res) => { 
+  Exercise.findById(req.params.id) //parameter from url
+    .then(exercise => {
+      exercise.username = req.body.username; // exercise.username (exercise is from database) set to username form the request body
+      exercise.description = req.body.description; // same for the rets of the fields
+      exercise.duration = Number(req.body.duration);
+      exercise.date = Date.parse(req.body.date);
+
+      exercise.save() //saving exercise with new information to the database
+        .then(() => res.json('Exercise updated!'))
+        .catch(err => res.status(400).json('Error' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
 module.exports = router;
