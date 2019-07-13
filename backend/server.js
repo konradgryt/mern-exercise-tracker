@@ -19,11 +19,11 @@ connection.once('open', () => {
 })
 
 //requiring the files 
-//const exercisesRouter = require('./routes/exercises');
+const exercisesRouter = require('./routes/exercises');
 const usersRouter = require('./routes/users');
 
 //and then using the files - when somebody goes to /exercise in URL then its going to load everything in the route
-//app.use('/exercises', exercisesRouter);
+app.use('/exercises', exercisesRouter);
 app.use('/users', usersRouter);
 
 
