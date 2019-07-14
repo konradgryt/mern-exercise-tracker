@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+//functional component - lack of states and lifecycle methods 
 const Exercise = props => (
   <tr>
     <td>{props.exercise.username}</td>
